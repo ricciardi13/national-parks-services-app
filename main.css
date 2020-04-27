@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+}
+
+#wrapper {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.form {
+    text-align: center;
+    background: #e1e1e1;
+    padding: 10px 0;
+}
+
+.form fieldset {
+    width: 600px;
+    height: 100px;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: column wrap; 
+    border: none;   
+}
+
+.form fieldset * {
+    width: 125px;
+    margin: 10px;    
+}
+

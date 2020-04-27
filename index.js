@@ -1,22 +1,21 @@
+'use strict';
+
 const API_key = "rvBOo36IQaVxFFaewQM48yiSC9LYJGAj6eFyBZE8";
 
-function getInputs(){
-    console.log("clicked");
-    let inputs = {
-        firstState: $(".js-dropdown-1").val(),
-        secondState: $(".js-dropdown-2").val(),
-        thirdState: $(".js-dropdown-3").val(),
-        numResults: $(".js-textInput").val()
-    }
-    console.log(inputs);
-    getResponse(inputs); 
+function getInputs() {
+  let inputs = {
+    firstState: $(".js-dropdown-1").val(),
+    secondState: $(".js-dropdown-2").val(),
+    thirdState: $(".js-dropdown-3").val(),
+    numResults: $(".js-textInput").val()
+  }
+  getResponse(inputs);
 }
 
-function getResponse(inputs){
-    let url = `https://developer.nps.gov/api/v1/parks?stateCode=${inputs.firstState}&stateCode=${inputs.secondState}&stateCode=${inputs.thirdState}&limit=${inputs.numResults}&start=1&api_key=rvBOo36IQaVxFFaewQM48yiSC9LYJGAj6eFyBZE8`;
-    console.log(url);
+function getResponse(inputs) {
+  let url = `https://developer.nps.gov/api/v1/parks?stateCode=${inputs.thirdState}&stateCode=${inputs.secondState}&stateCode=${inputs.firstState}&limit=${inputs.numResults}&start=1&api_key=rvBOo36IQaVxFFaewQM48yiSC9LYJGAj6eFyBZE8`;
 
-    fetch(url)
+  fetch(url)
     .then(response => {
       if (response.ok) {
         return response.json();
@@ -29,28 +28,22 @@ function getResponse(inputs){
     });
 }
 
-function displayResults(responseJson){
-    console.log(responseJson);
-    $(".js-results").empty();
-    console.log(responseJson.data[0].fullName);
-    for (let i = 0; i < responseJson.limit; i++){
-        console.log("hello " + i);
-          $(".js-results").append(
-            `<section class="result">
+function displayResults(responseJson) {
+  $(".js-results").empty();
+  for (let i = 0; i < responseJson.limit; i++) {
+    $(".js-results").append(
+      `<section class="result">
                 <h3>${responseJson.data[i].fullName}</h3>
-                <p>${responseJson.data[i].description} <a href="${responseJson.data[i].url}">Learn More.</a></p>
-            </section>`);  
-    } 
-    console.log("display complete");
-    
+                <p>${responseJson.data[i].description} <a href="${responseJson.data[i].url} target="_blank"">Learn More.</a></p>
+            </section>`);
+  }
 }
 
-function watch(){
-    console.log("loaded");
-    $(".js-form").on("click", $(".submit"), function(e){
-        e.preventDefault();
-        getInputs();
-    });
+function watch() {
+  $(".js-form").on("click", $(".submit"), function (e) {
+    e.preventDefault();
+    getInputs();
+  });
 }
 
 $(watch);

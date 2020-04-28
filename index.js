@@ -13,8 +13,8 @@ function getInputs() {
 }
 
 function getResponse(inputs) {
-  let url = `https://developer.nps.gov/api/v1/parks?stateCode=${inputs.thirdState}&stateCode=${inputs.secondState}&stateCode=${inputs.firstState}&limit=${inputs.numResults}&start=1&api_key=rvBOo36IQaVxFFaewQM48yiSC9LYJGAj6eFyBZE8`;
-
+  let url = `https://developer.nps.gov/api/v1/parks?stateCode=${inputs.firstState},${inputs.secondState},${inputs.thirdState}&limit=${inputs.numResults}&api_key=rvBOo36IQaVxFFaewQM48yiSC9LYJGAj6eFyBZE8`;
+  console.log(url);
   fetch(url)
     .then(response => {
       if (response.ok) {
@@ -29,6 +29,7 @@ function getResponse(inputs) {
 }
 
 function displayResults(responseJson) {
+  console.log(responseJson);
   $(".js-results").empty();
   for (let i = 0; i < responseJson.limit; i++) {
     $(".js-results").append(
@@ -40,7 +41,7 @@ function displayResults(responseJson) {
 }
 
 function watch() {
-  $(".js-form").on("click", $(".submit"), function (e) {
+  $(".js-form").submit(function(e) {
     e.preventDefault();
     getInputs();
   });

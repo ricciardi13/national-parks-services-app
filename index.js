@@ -3,18 +3,18 @@
 const API_key = "rvBOo36IQaVxFFaewQM48yiSC9LYJGAj6eFyBZE8";
 
 function getInputs() {
-  let inputs = {
-    firstState: $(".js-dropdown-1").val(),
-    secondState: $(".js-dropdown-2").val(),
-    thirdState: $(".js-dropdown-3").val(),
-    numResults: $(".js-textInput").val()
+  let entryString = $(".stateEntry").val().toLowerCase().split(",");
+  for (let i = 0; i < entryString.length; i++){
+    entryString[i] = entryString[i].trim();
   }
-  getResponse(inputs);
+  entryString = entryString.toString();
+  console.log(entryString);
+  let results = $(".numEntry").val();
+  getResponse(entryString, results);
 }
 
-function getResponse(inputs) {
-  let url = `https://developer.nps.gov/api/v1/parks?stateCode=${inputs.firstState},${inputs.secondState},${inputs.thirdState}&limit=${inputs.numResults}&api_key=rvBOo36IQaVxFFaewQM48yiSC9LYJGAj6eFyBZE8`;
-  console.log(url);
+function getResponse(entryString, results) {
+  let url = `https://developer.nps.gov/api/v1/parks?stateCode=${entryString}&limit=${results}&api_key=rvBOo36IQaVxFFaewQM48yiSC9LYJGAj6eFyBZE8`;
   fetch(url)
     .then(response => {
       if (response.ok) {
@@ -29,7 +29,6 @@ function getResponse(inputs) {
 }
 
 function displayResults(responseJson) {
-  console.log(responseJson);
   $(".js-results").empty();
   for (let i = 0; i < responseJson.limit; i++) {
     $(".js-results").append(

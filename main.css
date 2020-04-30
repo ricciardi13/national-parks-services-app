@@ -19,13 +19,13 @@ h1 {
 
 .form fieldset {
     width: 600px;
-    height: 100px;
+    /*height: 100px; */
     margin: 0 auto;
-    display: grid;
+    /*display: grid;
     grid-template-rows: 40px 40px;
     grid-template-columns: 200px 200px;
     align-items: center;
-    justify-content: center;
+    justify-content: center;*/
     border: none;   
 }
 
